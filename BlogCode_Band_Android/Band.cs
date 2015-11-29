@@ -23,14 +23,14 @@ namespace BlogCode_Band_Android {
         }
 
         private async void PairBand() {
-            var bandClientManager = BandClientManager.Instance
+            var bandClientManager = BandClientManager.Instance;
             var bandsFound = await bandClientManager.GetPairedBandsAsync();
 
             if (bandsFound != null && bandsFound.Count() == 1)
             {
-                var bandDevice = bandsFound.FirstOrDefault();
-                BandDevice.BandClient = await bandClientManager.ConnectAsync(bandDevice);
-                BandDevice.Name = bandDevice.Name;
+                var bandFound = bandsFound.FirstOrDefault();
+                BandDevice.BandClient = await bandClientManager.ConnectAsync(bandFound);
+                BandDevice.Name = bandFound.Name;
             }
         }
 

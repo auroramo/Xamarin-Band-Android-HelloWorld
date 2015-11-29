@@ -10,7 +10,7 @@ using Android.OS;
 using Microsoft.Band.Portable;
 
 namespace BlogCode_Band_Android {
-    [Activity(Label = "BlogCode_Band_Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Hello World Band Android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity {
 
         protected override void OnCreate(Bundle bundle) {
@@ -18,11 +18,15 @@ namespace BlogCode_Band_Android {
             SetContentView(Resource.Layout.Main);
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
+            // get new instance
+            var myBand = Band.Instance;
+
             button.Click += delegate
             {
-                var myBand = Band.Instance;
-
-                button.Text = string.Format("Connected to {0}!", myBand.Name);
+                if (myBand != null && myBand.BandClient.IsConnected)
+                    button.Text = string.Format("Connected to {0}!", myBand.Name);
+                else
+                    Toast.MakeText(this, "Band not yet connected or not found!", ToastLength.Long);
             };
         }
     }
