@@ -12,7 +12,6 @@ using Microsoft.Band.Portable;
 namespace BlogCode_Band_Android {
     [Activity(Label = "Hello World Band Android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity {
-
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);

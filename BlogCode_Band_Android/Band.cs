@@ -13,7 +13,7 @@ using Android.Widget;
 using Microsoft.Band.Portable;
 
 namespace BlogCode_Band_Android {
-    class Band {
+    public class Band {
         private static Band BandDevice;
         public BandClient BandClient { get; set; }
         public String Name { get; set; }
