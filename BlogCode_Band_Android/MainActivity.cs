@@ -12,13 +12,15 @@ using Microsoft.Band.Portable;
 namespace BlogCode_Band_Android {
     [Activity(Label = "Hello World Band Android", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity {
+
+        private static Band myBand;
+
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            // get new instance
-            var myBand = Band.Instance;
+            SetupBand();
 
             button.Click += delegate
             {
@@ -27,6 +29,12 @@ namespace BlogCode_Band_Android {
                 else
                     Toast.MakeText(this, "Band not yet connected or not found!", ToastLength.Long);
             };
+        }
+
+        private async void SetupBand() {
+            // get new instance
+            myBand = Band.Instance;
+            await myBand.PairBand();
         }
     }
 }

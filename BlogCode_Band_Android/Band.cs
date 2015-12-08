@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -22,7 +22,7 @@ namespace BlogCode_Band_Android {
 
         }
 
-        private async void PairBand() {
+        public async Task PairBand() {
             var bandClientManager = BandClientManager.Instance;
             var bandsFound = await bandClientManager.GetPairedBandsAsync();
 
@@ -35,11 +35,12 @@ namespace BlogCode_Band_Android {
         }
 
         public static Band Instance {
-            get {
+            get
+            {
+                // singleton
                 if (BandDevice == null)
                 {
                     BandDevice = new Band();
-                    BandDevice.PairBand();
                 }
                 return BandDevice;
             }
